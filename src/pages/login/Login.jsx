@@ -1,6 +1,7 @@
-import axios from "axios";
+
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
 
 import "./login.scss";
@@ -23,7 +24,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", credentials);
+      const res = await axiosInstance.post("/auth/login", credentials);
      if(res.data.isAdmin){
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details});
       navigate("/")
